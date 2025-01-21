@@ -1,2 +1,2 @@
 # WASP-Interpreter
-I have created my own llanguage wasp and I want a interpreter for it
+I have created my own llanguage wasp and I have created an interpreter for it.

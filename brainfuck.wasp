@@ -1,0 +1,49 @@
+int memory  [30000];
+int pointer = 0  ;
+int    code_ptr = 0 ;
+int    code_len = 164;
+word    output ="";
+int   loop_stack [30000];
+int loop_stack_top = -1;
+word code = ">++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.";
+word cmd =" ";
+int open_loops;
+int close_loops;
+
+    while (code_ptr < code_len) {
+        cmd = code[code_ptr];
+        if (cmd == ">"){
+            pointer =pointer+ 1;}
+        elif( cmd == "<"){
+            pointer =(pointer - 1);}
+        elif (cmd == "+"){
+            memory[pointer] = (memory[pointer] + 1)%256; }
+        elif (cmd == "-"){
+            memory[pointer] = (memory[pointer] - 1)%256;}
+        elif (cmd == ","){
+            memory[pointer] = 65;}
+        elif (cmd == "."){
+            output=output + char(memory[pointer]);}
+        elif (cmd == "["){
+            if (memory[pointer] == 0){
+                open_loops = 1;
+                while (open_loops){
+                    code_ptr = code_ptr+ 1;
+                    if (code[code_ptr] == "["){
+                        open_loops =open_loops + 1;}
+                    elif (code[code_ptr] == "]"){
+                        open_loops = open_loops -1;};
+        };};}
+        elif (cmd == "]"){
+            if (memory[pointer] != 0) {
+                close_loops = 1;
+                while( close_loops){
+                    code_ptr =code_ptr- 1;
+                    if (code[code_ptr] == "]"){
+                        close_loops = close_loops+ 1;}
+                    elif (code[code_ptr] == "["){
+                        close_loops = close_loops- 1;};};};};
+        code_ptr = code_ptr + 1;
+    };
+
+give(output);
